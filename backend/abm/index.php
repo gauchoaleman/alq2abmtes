@@ -7,7 +7,9 @@
   <body>
 
     <div class="container">
-<?php include "include/inc_menu.php";
+<?php
+if (isset($_SESSION["loginId"])){
+include "include/inc_menu.php";
 
 if( isset($_GET["mensaje"]) ) echo $_GET["mensaje"];
 if( isset($_GET["accion"]) )
@@ -31,16 +33,20 @@ if( isset($_GET["accion"]) )
   </body>
 </html>
 <?php
+}
+
 function tryLogin($Data){
 	global $SqlLink;
 
 	extract($Data);
-	$query = "SELECT idUsuario FROM usuario WHERE nombre='$nombre' AND clave='$clave';";
-	echo $query;
+	$query = "SELECT Administradores_id FROM Administradores WHERE Nombre='$nombre' AND Clave='$clave';";
+	//echo $query;
 	$resultObject = mysqli_query($SqlLink,$query);
-	$obj = $resultObject->fetch_object();
+  //print_r($resultObject);
+  $obj = $resultObject->fetch_object();
+  print_r($obj);
 	if( $resultObject->num_rows >0){
-		$_SESSION["loginId"] = $obj->idUsuario;
+		$_SESSION["loginId"] = $obj->Administradores_id;
 		return true;
 	}
 	else

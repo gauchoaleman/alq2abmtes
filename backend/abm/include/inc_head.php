@@ -6,7 +6,7 @@ Código del head que se incluye en todas las páginas
 include_once("../../include/inc_connectdb.php");
 
 if (!isset($_SESSION["loginId"]))
-	require("../loginForm.php");
+	require("./loginForm.php");
 else{
 ?>
 <head>
@@ -42,6 +42,4 @@ else{
 	h5   {font-weight: bold;}
 	</style>
   </head>
-<?
-}
-?>
+<?}?>
